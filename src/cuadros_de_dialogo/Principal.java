@@ -22,7 +22,7 @@ public class Principal {
     
         public Ventana(){
             
-            this.setSize(700, 400); this.setLocationRelativeTo(null);
+            this.setSize(700, 500); this.setLocationRelativeTo(null);
             
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            
