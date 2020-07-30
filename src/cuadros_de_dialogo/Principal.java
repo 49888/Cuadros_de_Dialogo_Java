@@ -1,12 +1,9 @@
 
 package cuadros_de_dialogo;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class Principal {
 
@@ -38,36 +35,79 @@ public class Principal {
             
                 
             //PANEL INFERIOR
-                JButton mostrar = new JButton("Mostrar");
+                JPanel inferior = panelInferior(A);
                 
-                    mostrar.addActionListener(new ActionListener(){
-                        
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
-                            A.mostrar();
-                        }
-                    });
-        
-                JButton salir = new JButton("Salir");
-        
-                    salir.addActionListener(new ActionListener(){
+                this.add(inferior, BorderLayout.SOUTH);
+            
 
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            System.exit(0);
-                        }
-                    });
-                    
-                JPanel panelInferior = new JPanel();
-                panelInferior.add(mostrar); panelInferior.add(salir);
-                
-                this.add(panelInferior, BorderLayout.SOUTH);
-            
-            
             this.setVisible(true);
         }
         
      //Fin de Clase Ventana
+    }
+    
+    //PANEL INFERIOR ------------------------------------------------------------------------------------------------
+    private static JPanel panelInferior(Eventos A){
+        
+        JPanel panelInferior = new JPanel();
+        
+        //MUESTRA EL CUADRO DE DIALOGO
+        JButton mostrar = new JButton("Mostrar");
+                
+            mostrar.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    A.mostrar();
+                }
+            });
+        
+        //SALE DEL PROGRAMA    
+        JButton salir = new JButton("Salir");
+
+            salir.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+                    
+        
+        panelInferior.add(mostrar); panelInferior.add(salir);
+    
+        return(panelInferior);
+    }
+    
+    //PANEL DE OPCIONES ---------------------------------------------------------------------------------------------
+    private static class panelOpciones extends JPanel{
+
+        public panelOpciones(){
+
+            GridLayout layout = new GridLayout(2, 3);
+
+            this.setLayout(layout);
+
+            CuadroDialogo tipo = new CuadroDialogo();
+            this.add( tipo.getTipoCuadroDialogo() );
+
+            TipoMensaje tipoMensaje = new TipoMensaje();
+            this.add( tipoMensaje.getTipoMensaje() );
+
+            TipoConfirmar tipoConfirmar = new TipoConfirmar();
+            this.add(tipoConfirmar.getTipoConfirmar());
+
+            Mensaje mensaje = new Mensaje();
+            this.add( mensaje.getMensaje() );
+
+            Opcion opcion = new Opcion();
+            this.add(opcion.getOpcion());
+
+            EntradaModificar entrada = new EntradaModificar();
+            this.add( entrada.getEntrada() );
+        }
+
+     //Fin de Clase panelOpciones  
     }
     
  //Fin de Clase Principal
