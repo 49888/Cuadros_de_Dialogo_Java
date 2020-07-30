@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -200,26 +201,41 @@ public class panelOpciones extends JPanel{
         return(caja);
     }
     
-    private Box entrada(String titulo){
+    private JPanel entrada(String titulo){
     
-        Box caja = new Box(BoxLayout.Y_AXIS);
+        JPanel panel = new JPanel(new GridLayout(2, 1));
+        
+        Box caja1 = new Box(BoxLayout.Y_AXIS);
         
         //Componentes
-        ButtonGroup grupo = new ButtonGroup();
-        
-        JCheckBox texto = new JCheckBox("Cuadro de texto");
-        JCheckBox combo = new JCheckBox("Menu desplegable");
+            ButtonGroup grupo = new ButtonGroup();
 
+            JCheckBox texto = new JCheckBox("Cuadro de texto");
+            JCheckBox combo = new JCheckBox("Menu desplegable");
 
-        
-        grupo.add(texto); grupo.add(combo); 
-        
-        caja.add(texto); caja.add(combo); 
+            grupo.add(texto); grupo.add(combo); 
+
+            caja1.add(texto); caja1.add(combo); 
         
         Border borde = BorderFactory.createLineBorder(Color.RED);
-        caja.setBorder(BorderFactory.createTitledBorder(borde, titulo));
+        caja1.setBorder(BorderFactory.createTitledBorder(borde, titulo));
         
-        return(caja);
+        panel.add(caja1);
+        
+        Box caja2 = new Box(BoxLayout.Y_AXIS);
+        
+            JButton cambiarTitulo = new JButton("Cambiar Titulo");
+            JButton cambiarIcono = new JButton("Cambiar Icono");
+            
+            Eventos.cambiar(cambiarTitulo, caja2); Eventos.cambiar(cambiarIcono, caja2);
+        
+        caja2.add(cambiarTitulo); caja2.add(Box.createVerticalStrut(10)); caja2.add(cambiarIcono); 
+        
+        caja2.setBorder(BorderFactory.createTitledBorder(borde, "Modificar"));
+        
+        panel.add(caja2);
+        
+        return(panel);
     }
  //Fin de Clase panelOpciones  
 }
